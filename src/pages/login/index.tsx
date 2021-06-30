@@ -20,7 +20,7 @@ export default function Login() {
 
   useEffect(() => {
     logout();
-  }, []);
+  }, [logout]);
 
   const onSubmit = () => {
     const issues = [];

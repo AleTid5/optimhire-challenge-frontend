@@ -11,7 +11,7 @@ const withAuthenticatedLogin =
       if (!isUserLogged()) {
         history.push("/login");
       }
-    }, [user]);
+    }, [history, isUserLogged, user]);
 
     return <Component {...props} />;
   };
