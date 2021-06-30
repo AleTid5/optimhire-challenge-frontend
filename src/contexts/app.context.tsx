@@ -15,7 +15,9 @@ const { Provider } = AppContext;
 export const AppProvider = ({ children }: AppProviderInterface) => {
   const [user, setUser] = useState<UserInterface | null>(null);
 
-  const authenticate = (user: UserInterface) => setUser(user);
+  const authenticate = (user: UserInterface) => {
+    setUser(user);
+  };
 
   return <Provider value={{ user, authenticate }}>{children}</Provider>;
 };

@@ -27,6 +27,7 @@ export default function Input({
         type={type}
         className="bg-gray-400 rounded-xl p-2 w-full text-white focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-transparent"
         onChange={({ target: { value: newValue } }) => onChange(newValue)}
+        autoComplete="off"
       />
     </div>
   );
