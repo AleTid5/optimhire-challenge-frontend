@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   AppContextInterface,
   AppProviderInterface,
@@ -7,7 +7,9 @@ import { UserInterface } from "../interfaces/user.interface";
 
 const AppContext = createContext({
   user: null,
+  isUserLogged: () => false,
   authenticate: (T: UserInterface) => {},
+  logout: () => {},
 } as AppContextInterface);
 
 const { Provider } = AppContext;
@@ -17,9 +19,29 @@ export const AppProvider = ({ children }: AppProviderInterface) => {
 
   const authenticate = (user: UserInterface) => {
     setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
-  return <Provider value={{ user, authenticate }}>{children}</Provider>;
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  };
+
+  const isUserLogged = () => localStorage.getItem("user") !== null;
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+
+    if (savedUser !== null) {
+      setUser(JSON.parse(savedUser) as UserInterface);
+    }
+  }, []);
+
+  return (
+    <Provider value={{ user, isUserLogged, authenticate, logout }}>
+      {children}
+    </Provider>
+  );
 };
 
 export const useAppContext = () => {

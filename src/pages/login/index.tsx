@@ -1,20 +1,26 @@
 import Card from "../../components/card";
 import Input from "../../components/form/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/form/button";
 import ErrorNotification from "../../components/notification/error-notification";
 import { useAppContext } from "../../contexts/app.context";
 import { UserInterface } from "../../interfaces/user.interface";
+import { useHistory } from "react-router-dom";
 
 const isEmailValid = (email: string) => /\S+@\S+\.\S+/.test(email);
 
 export default function Login() {
-  const { authenticate } = useAppContext();
+  const history = useHistory();
+  const { authenticate, logout } = useAppContext();
   const [name, setName] = useState<string>("");
   const [lastname, setLastname] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [errors, setErrors] = useState<Array<string>>([]);
+
+  useEffect(() => {
+    logout();
+  }, []);
 
   const onSubmit = () => {
     const issues = [];
@@ -44,6 +50,7 @@ export default function Login() {
         email,
         phoneNumber: Number(phoneNumber),
       } as UserInterface);
+      history.push("/cryptocurrencies");
     }
   };
 
@@ -52,7 +59,7 @@ export default function Login() {
       <div className="flex items-center justify-center h-screen px-4">
         <Card>
           <div className="flex justify-center">
-            <div className="absolute bg-gray-500 w-16 h-16 rounded-full -top-8 mx-auto" />
+            <div className="absolute bg-gray-500 w-16 h-16 rounded-full -top-8" />
           </div>
           <div className="grid sm:grid-cols-2 gap-4 mt-4">
             <Input title="Name" value={name} onChange={setName} />

@@ -7,5 +7,7 @@ export interface AppProviderInterface {
 
 export interface AppContextInterface {
   user: UserInterface | null;
+  isUserLogged: () => boolean;
   authenticate: (user: UserInterface) => void;
+  logout: () => void;
 }

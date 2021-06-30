@@ -1,10 +1,14 @@
 import Login from "./login";
+import Cryptocurrencies from "./cryptocurrencies";
 
 const routes = [
   {
-    name: "Login",
     path: "/login",
     component: Login,
+  },
+  {
+    path: "/cryptocurrencies",
+    component: Cryptocurrencies,
   },
 ];
 
