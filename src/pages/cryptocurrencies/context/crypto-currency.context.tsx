@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { CryptoCurrencyInterface } from "../../../interfaces/crypto-currency.interface";
 
 interface CryptoCurrencyProviderProps {
@@ -20,7 +26,24 @@ export const CryptoCurrencyProvider = ({
   children,
   results,
 }: CryptoCurrencyProviderProps) => {
-  return <Provider value={{ results }}>{children}</Provider>;
+  const [cryptoCurrenciesProviders, setCryptoCurrenciesProviders] = useState<
+    CryptoCurrencyInterface[][]
+  >([]);
+
+  useEffect(() => {
+    const mergedCryptoCurrenciesProviders = results.map((provider, key) => [
+      ...provider,
+      ...(cryptoCurrenciesProviders[key] ?? []),
+    ]);
+
+    setCryptoCurrenciesProviders(mergedCryptoCurrenciesProviders);
+  }, [results]);
+
+  return (
+    <Provider value={{ results: cryptoCurrenciesProviders }}>
+      {children}
+    </Provider>
+  );
 };
 
 export const useCryptoCurrencyContext = () => {

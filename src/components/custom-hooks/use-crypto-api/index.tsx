@@ -4,16 +4,15 @@ import { CryptoCurrencyInterface } from "../../../interfaces/crypto-currency.int
 import CoingeckoSource from "./sources/coingecko.source";
 import StormGainSource from "./sources/storm-gain.source";
 import CryptoCompareSource from "./sources/crypto-compare.source";
+import useInterval from "../use-interval";
 
 export default function useCryptoApi() {
   const [error, setError] = useState<Error | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [results, setResults] = useState<CryptoCurrencyInterface[][]>([]);
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    const fetchData = async () => {
+  useInterval({
+    callback: async () => {
       try {
         setError(null);
 
@@ -23,9 +22,7 @@ export default function useCryptoApi() {
           StormGainSource(),
         ])) as CryptoCurrencyInterface[][];
 
-        setResults(
-          data.map((provider, key) => [...provider, ...(results[key] ?? [])])
-        );
+        setResults(data);
       } catch (e) {
         setError(e);
       } finally {
@@ -33,12 +30,9 @@ export default function useCryptoApi() {
           setIsLoading(false);
         }
       }
-    };
-
-    fetchData();
-
-    // setInterval(fetchData, 15000);
-  }, []);
+    },
+    delay: 15000,
+  });
 
   return [results, isLoading, error] as const;
 }
