@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/optimhire-challenge-frontend/static/css/main.65bb78f2.chunk.css",
-    "main.js": "/optimhire-challenge-frontend/static/js/main.128e80ea.chunk.js",
-    "main.js.map": "/optimhire-challenge-frontend/static/js/main.128e80ea.chunk.js.map",
+    "main.js": "/optimhire-challenge-frontend/static/js/main.2e107c5c.chunk.js",
+    "main.js.map": "/optimhire-challenge-frontend/static/js/main.2e107c5c.chunk.js.map",
     "runtime-main.js": "/optimhire-challenge-frontend/static/js/runtime-main.78eaf4e0.js",
     "runtime-main.js.map": "/optimhire-challenge-frontend/static/js/runtime-main.78eaf4e0.js.map",
     "static/js/2.3eea9aed.chunk.js": "/optimhire-challenge-frontend/static/js/2.3eea9aed.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.78eaf4e0.js",
     "static/js/2.3eea9aed.chunk.js",
     "static/css/main.65bb78f2.chunk.css",
-    "static/js/main.128e80ea.chunk.js"
+    "static/js/main.2e107c5c.chunk.js"
   ]
 }
