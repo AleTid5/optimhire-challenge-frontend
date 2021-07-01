@@ -27,9 +27,7 @@ export default function UseMxnCurrency() {
       } catch (e) {
         setError(e);
       } finally {
-        if (isFetching) {
-          setIsFetching(false);
-        }
+        setIsFetching(false);
       }
     };
 
