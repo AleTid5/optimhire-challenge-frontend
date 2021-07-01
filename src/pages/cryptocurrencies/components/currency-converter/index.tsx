@@ -1,11 +1,13 @@
+import { useState } from "react";
 import Card from "../../../../components/card";
 import Input from "../../../../components/form/input";
 import { useCryptoCurrencyContext } from "../../context/crypto-currency.context";
 import { CryptoCurrencyInterface } from "../../../../interfaces/crypto-currency.interface";
-import { useState } from "react";
+import useMxnCurrency from "../../../../components/custom-hooks/use-mxn-currency";
 
 export default function CurrencyConverter() {
   const { lastCryptoValues } = useCryptoCurrencyContext();
+  const [mxnCurrency, isFetching, error] = useMxnCurrency();
   const [value, setValue] = useState<number | undefined>(undefined);
 
   return (
@@ -14,7 +16,13 @@ export default function CurrencyConverter() {
         Currency Converter
       </div>
       <div className="grid sm:grid-cols-4 gap-4">
-        <Input value={value} onChange={setValue} title="MXN" type="number" />
+        <Input
+          value={value}
+          onChange={setValue}
+          title="MXN"
+          type="number"
+          disabled={isFetching || error !== null}
+        />
         {value &&
           value > 0 &&
           lastCryptoValues.map(
@@ -27,7 +35,7 @@ export default function CurrencyConverter() {
                   {lastCryptoValue.provider}
                 </div>
                 <div className="text-yellow-200 font-bold mt-3">
-                  {(lastCryptoValue.value * value).toFixed(2)}
+                  {(value * mxnCurrency) / lastCryptoValue.value}
                 </div>
               </div>
             )
