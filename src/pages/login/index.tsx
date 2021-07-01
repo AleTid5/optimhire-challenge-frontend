@@ -82,7 +82,7 @@ export default function Login() {
           <div className="flex justify-center">
             <Button
               className="mt-8"
-              size={96}
+              size="w-96"
               title="Submit"
               onClick={onSubmit}
             />
