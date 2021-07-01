@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/optimhire-challenge-frontend/static/css/main.847eb6b9.chunk.css",
+    "main.js": "/optimhire-challenge-frontend/static/js/main.47cf82e3.chunk.js",
+    "main.js.map": "/optimhire-challenge-frontend/static/js/main.47cf82e3.chunk.js.map",
+    "runtime-main.js": "/optimhire-challenge-frontend/static/js/runtime-main.78eaf4e0.js",
+    "runtime-main.js.map": "/optimhire-challenge-frontend/static/js/runtime-main.78eaf4e0.js.map",
+    "static/js/2.1569f405.chunk.js": "/optimhire-challenge-frontend/static/js/2.1569f405.chunk.js",
+    "static/js/2.1569f405.chunk.js.map": "/optimhire-challenge-frontend/static/js/2.1569f405.chunk.js.map",
+    "index.html": "/optimhire-challenge-frontend/index.html",
+    "static/css/main.847eb6b9.chunk.css.map": "/optimhire-challenge-frontend/static/css/main.847eb6b9.chunk.css.map",
+    "static/js/2.1569f405.chunk.js.LICENSE.txt": "/optimhire-challenge-frontend/static/js/2.1569f405.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.78eaf4e0.js",
+    "static/js/2.1569f405.chunk.js",
+    "static/css/main.847eb6b9.chunk.css",
+    "static/js/main.47cf82e3.chunk.js"
+  ]
+}
