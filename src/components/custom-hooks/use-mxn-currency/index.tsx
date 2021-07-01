@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Error } from "../../../enums/error.enum";
 
+const FALLBACK_MXN_CURRENCY: number = 0.0498829931931606;
+
 export default function UseMxnCurrency() {
   const [error, setError] = useState<Error | null>(null);
   const [isFetching, setIsFetching] = useState<boolean>(true);
-  const [mxnCurrency, setMxnCurrency] = useState<number>(0);
+  const [mxnCurrency, setMxnCurrency] = useState<number>(FALLBACK_MXN_CURRENCY);
 
   useEffect(() => {
     const fetchData = async () => {

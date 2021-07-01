@@ -7,7 +7,7 @@ import useMxnCurrency from "../../../../components/custom-hooks/use-mxn-currency
 
 export default function CurrencyConverter() {
   const { lastCryptoValues } = useCryptoCurrencyContext();
-  const [mxnCurrency, isFetching, error] = useMxnCurrency();
+  const [mxnCurrency, isFetching] = useMxnCurrency();
   const [value, setValue] = useState<number | undefined>(undefined);
 
   return (
@@ -21,7 +21,7 @@ export default function CurrencyConverter() {
           onChange={setValue}
           title="MXN"
           type="number"
-          disabled={isFetching || error !== null}
+          disabled={isFetching}
         />
         {value &&
           value > 0 &&
