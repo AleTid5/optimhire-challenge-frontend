@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Error } from "../../../enums/error.enum";
 import { CryptoCurrencyInterface } from "../../../interfaces/crypto-currency.interface";
 import CoingeckoSource from "./sources/coingecko.source";

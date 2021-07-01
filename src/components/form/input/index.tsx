@@ -4,8 +4,8 @@ interface InputProps {
   type?: string;
   title?: string;
   className?: string;
-  value: string;
-  onChange: Dispatch<SetStateAction<string>>;
+  value: any;
+  onChange: Dispatch<SetStateAction<any>>;
 }
 
 export default function Input({

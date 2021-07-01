@@ -7,6 +7,8 @@ import { CryptoCurrency } from "../../enums/crypto-currency.enum";
 import useCryptoApi from "../../components/custom-hooks/use-crypto-api";
 import { CryptoCurrencyProvider } from "./context/crypto-currency.context";
 import CryptoCurrencyGridSkeleton from "./components/crypto-currency-grid/skeleton";
+import ErrorCard from "../../components/error-card";
+import CurrencyConverter from "./components/currency-converter";
 
 const Cryptocurrencies = () => {
   const [results, isLoading, error] = useCryptoApi();
@@ -19,21 +21,26 @@ const Cryptocurrencies = () => {
 
   return (
     <CryptoCurrencyProvider results={results}>
-      <div className="flex items-center justify-center h-screen px-4">
+      <div className="flex items-center justify-center min-h-screen p-4">
         <Card>
           <Logout />
-          <Tabs className="mt-6" tabs={cryptoCurrencies}>
-            {cryptoCurrencies.map((cryptoCurrency, key) =>
-              isLoading ? (
-                <CryptoCurrencyGridSkeleton />
-              ) : (
-                <CryptoCurrencyGrid
-                  cryptoCurrencyName={cryptoCurrency}
-                  key={key}
-                />
-              )
-            )}
-          </Tabs>
+          {error ? (
+            <ErrorCard className="mt-6" />
+          ) : (
+            <Tabs className="mt-6" tabs={cryptoCurrencies}>
+              {cryptoCurrencies.map((cryptoCurrency, key) =>
+                isLoading ? (
+                  <CryptoCurrencyGridSkeleton key={key} />
+                ) : (
+                  <CryptoCurrencyGrid
+                    cryptoCurrencyName={cryptoCurrency}
+                    key={key}
+                  />
+                )
+              )}
+            </Tabs>
+          )}
+          <CurrencyConverter />
         </Card>
       </div>
     </CryptoCurrencyProvider>

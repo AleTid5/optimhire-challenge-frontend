@@ -2,6 +2,7 @@ import Card from "../../../../components/card";
 import { CryptoCurrency } from "../../../../enums/crypto-currency.enum";
 import { useCryptoCurrencyContext } from "../../context/crypto-currency.context";
 import { CryptoCurrencyInterface } from "../../../../interfaces/crypto-currency.interface";
+import { useEffect, useMemo } from "react";
 
 interface CurrencyViewerProps {
   cryptoCurrencyName: CryptoCurrency;
@@ -10,24 +11,41 @@ interface CurrencyViewerProps {
 export default function CryptoCurrencyGrid({
   cryptoCurrencyName,
 }: CurrencyViewerProps) {
-  const { results } = useCryptoCurrencyContext();
+  const { results, updateLastCryptoValues } = useCryptoCurrencyContext();
 
-  const cryptoCurrencyProviders = results.map((provider) =>
-    provider.filter(
-      (cryptoCurrencyResult: CryptoCurrencyInterface) =>
-        cryptoCurrencyResult.name === cryptoCurrencyName
-    )
+  const cryptoCurrencyProviders = useMemo(
+    () =>
+      results.map((provider) =>
+        provider.filter(
+          (cryptoCurrencyResult: CryptoCurrencyInterface) =>
+            cryptoCurrencyResult.name === cryptoCurrencyName
+        )
+      ),
+    [cryptoCurrencyName, results]
   );
 
   const getParsedCurrency = (value: number) => value.toLocaleString("es-MX");
 
+  useEffect(() => {
+    updateLastCryptoValues(
+      cryptoCurrencyProviders.map(
+        ([{ provider, value, name, lastUpdated }]) => ({
+          provider,
+          value,
+          name,
+          lastUpdated,
+        })
+      ) as CryptoCurrencyInterface[]
+    );
+  }, [cryptoCurrencyProviders]);
+
   return (
     <div className="py-4 select-none">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-3 gap-4">
         {cryptoCurrencyProviders.map((cryptoCurrencyProvider, key) => {
           const [{ provider, value }] = cryptoCurrencyProvider;
           return (
-            <Card type="lightGray" key={key} className="px-4 py-4">
+            <Card backgroundColor="bg-dark-500" key={key} className="px-4 py-4">
               <div className="text-yellow-300 font-bold text-2xl text-center">
                 {getParsedCurrency(value)}
               </div>

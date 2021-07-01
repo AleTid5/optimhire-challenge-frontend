@@ -14,10 +14,14 @@ interface CryptoCurrencyProviderProps {
 
 interface CryptoCurrencyContextInterface {
   results: CryptoCurrencyInterface[][];
+  lastCryptoValues: CryptoCurrencyInterface[];
+  updateLastCryptoValues: (cryptoCurrencies: CryptoCurrencyInterface[]) => void;
 }
 
 const CryptoCurrencyContext = createContext({
   results: [],
+  lastCryptoValues: [],
+  updateLastCryptoValues: () => {},
 } as CryptoCurrencyContextInterface);
 
 const { Provider } = CryptoCurrencyContext;
@@ -29,6 +33,15 @@ export const CryptoCurrencyProvider = ({
   const [cryptoCurrenciesProviders, setCryptoCurrenciesProviders] = useState<
     CryptoCurrencyInterface[][]
   >([]);
+  const [lastCryptoValues, setLastCryptoValues] = useState<
+    CryptoCurrencyInterface[]
+  >([]);
+
+  const updateLastCryptoValues = (
+    cryptoCurrencies: CryptoCurrencyInterface[]
+  ) => {
+    setLastCryptoValues(cryptoCurrencies);
+  };
 
   useEffect(() => {
     const mergedCryptoCurrenciesProviders = results.map((provider, key) => [
@@ -37,10 +50,17 @@ export const CryptoCurrencyProvider = ({
     ]);
 
     setCryptoCurrenciesProviders(mergedCryptoCurrenciesProviders);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [results]);
 
   return (
-    <Provider value={{ results: cryptoCurrenciesProviders }}>
+    <Provider
+      value={{
+        results: cryptoCurrenciesProviders,
+        lastCryptoValues,
+        updateLastCryptoValues,
+      }}
+    >
       {children}
     </Provider>
   );
