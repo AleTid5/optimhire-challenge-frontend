@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 interface ActionButton {
   title: string;
   action: () => void;
@@ -5,10 +7,10 @@ interface ActionButton {
 
 interface ModalProps {
   visible: boolean;
-  title: string;
+  title: ReactNode | string;
   primaryButton: ActionButton;
-  secondaryButton: ActionButton;
-  subtitle?: string;
+  secondaryButton?: ActionButton | null;
+  subtitle?: ReactNode | string;
   icon?: any;
 }
 
@@ -40,12 +42,14 @@ export default function Modal({
             )}
           </div>
           <div className="p-3  mt-2 text-center space-x-4 md:block">
-            <button
-              className="mb-2 md:mb-0 bg-white px-5 py-2 text-xs shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100 uppercase"
-              onClick={secondaryButton.action}
-            >
-              {secondaryButton.title}
-            </button>
+            {secondaryButton && (
+              <button
+                className="mb-2 md:mb-0 bg-white px-5 py-2 text-xs shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100 uppercase"
+                onClick={secondaryButton.action}
+              >
+                {secondaryButton.title}
+              </button>
+            )}
             <button
               className="mb-2 md:mb-0 bg-yellow-400 border border-yellow-400 px-5 py-2 text-xs shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-yellow-500 uppercase"
               onClick={primaryButton.action}

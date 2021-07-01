@@ -1,5 +1,4 @@
 import Card from "../../components/card";
-import Logout from "../../components/logout";
 import withAuthenticatedLogin from "../../components/with-authenticated-login";
 import Tabs from "../../components/tabs";
 import CryptoCurrencyGrid from "./components/crypto-currency-grid";
@@ -9,6 +8,7 @@ import { CryptoCurrencyProvider } from "./context/crypto-currency.context";
 import CryptoCurrencyGridSkeleton from "./components/crypto-currency-grid/skeleton";
 import ErrorCard from "../../components/error-card";
 import CurrencyConverter from "./components/currency-converter";
+import Navbar from "../../components/navbar";
 
 const Cryptocurrencies = () => {
   const [results, isLoading, error] = useCryptoApi();
@@ -23,7 +23,7 @@ const Cryptocurrencies = () => {
     <CryptoCurrencyProvider results={results}>
       <div className="flex items-center justify-center min-h-screen p-4">
         <Card>
-          <Logout />
+          <Navbar />
           {error ? (
             <ErrorCard className="mt-6" />
           ) : (
