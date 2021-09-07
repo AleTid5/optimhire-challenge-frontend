@@ -1,6 +1,6 @@
 # Optimhire React Challenge
 ![React](https://img.shields.io/badge/-React-20232a?logo=react&style=for-the-badge)
-![Typescript](https://img.shields.io/badge/-Typescript-2c3b5a?logo=typescript&style=for-the-badge)
+![Typescript](https://img.shields.io/badge/-typescript-2c3b5a?logo=typescript&style=for-the-badge)
 ![Tailwind](https://img.shields.io/badge/-Tailwind-012c42?logo=tailwindcss&style=for-the-badge)
 
 # 🤔 What is this?
